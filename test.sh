@@ -1,2 +1,2 @@
 #!/bin/sh
-cd src && falderal test ../tests/Pail.falderal
+cd src && falderal test ../tests/Pail.markdown
