@@ -26,4 +26,6 @@ EOF
 fi
 
 falderal fixture.markdown tests/Pail.markdown
+RESULT=$?
 rm -f fixture.markdown
+exit $RESULT
