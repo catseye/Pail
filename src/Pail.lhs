@@ -225,8 +225,7 @@ themselves involve further outer reductions.
 Outer Reduction
 ---------------
 
-An evaluation of some expression x o-reduces to the i-reduction of its
-contents.
+An evaluation of an expression o-reduces to the i-reduction of its contents.
 
 > oReduce env (Eval x)              = iReduce env x
 
@@ -268,7 +267,7 @@ Again, to try to limit confusion (I must not say "reduce confusion" or
 things will get even worse), we use the terminology that a function
 "returns" a value here, rather than "reducing" or "evaluating" to one.
 
-Applying `fst` to a pair (resp. `snd`) returns the o-reduction of the
+Applying `fst` (resp. `snd`) to a pair returns the o-reduction of the
 first (resp. second) element of that pair.
 
 > pFst env (Pair a _)                           = oReduce env a
@@ -316,7 +315,7 @@ And finally, we define the standard environment by associating each of the
 above defined functions with a symbol.
 
 > stdEnv :: Env
-> stdEnv = Map.fromList (map (\(name, fun) -> (name, (Fn name fun)))
+> stdEnv = Map.fromList $ map (\(name, fun) -> (name, (Fn name fun)))
 >     [
 >       ("fst",        pFst),
 >       ("snd",        pSnd),
@@ -324,7 +323,7 @@ above defined functions with a symbol.
 >       ("type-of",    pTypeOf),
 >       ("uneval",     pUnEval),
 >       ("let",        pLet)
->     ])
+>     ]
 
 
 Top-Level Driver

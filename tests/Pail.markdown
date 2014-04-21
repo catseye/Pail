@@ -10,10 +10,6 @@ Pail Tests
 
     -> Tests for functionality "Evaluate Pail Expression"
 
-    -> Functionality "Evaluate Pail Expression" is implemented by
-    -> shell command
-    -> "ghc -e "do c <- readFile \"%(test-file)\"; putStrLn $ Pail.runPail c" Pail.lhs"
-
 A symbol reduces to that symbol.
 
     | fst
