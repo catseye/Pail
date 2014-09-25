@@ -11,7 +11,7 @@ if [ ! x`which ghc` = x ]; then
     cat >>fixture.markdown <<EOF
     -> Functionality "Evaluate Pail Expression" is implemented by
     -> shell command
-    -> "ghc -e "do c <- readFile \"%(test-file)\"; putStrLn $ Pail.runPail c" src/Pail.lhs"
+    -> "ghc -e "do c <- readFile \"%(test-body-file)\"; putStrLn $ Pail.runPail c" src/Pail.lhs"
 
 EOF
 fi
