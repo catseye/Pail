@@ -1,7 +1,16 @@
 #!/bin/sh
 
+PROG=pail
+
+if command -v ghc >/dev/null 2>&1; then
+    echo "building $PROG.exe with ghc"
+    (cd src && ghc --make Main.hs -o ../bin/$PROG.exe)
+else
+    echo "ghc not found, not building $PROG.exe"
+fi
+
 # For this to work, you need hastec installed.
-# You also need parsec installed so that haste can use it:
+# You also need parsec installed in a way that haste can use it:
 #
 #    haste-cabal install parsec-3.1.1
 #
@@ -12,7 +21,8 @@
 #
 
 if command -v hastec >/dev/null 2>&1; then
-  ( cd src && hastec HasteMain.hs -o ../demo/pail.js )
+    echo "building $PROG.js with hastec"
+    (cd src && hastec --make HasteMain.hs -o ../demo/$PROG.js)
 else
-  echo "hastec not found, not building pail.js"
+    echo "hastec not found, not building $PROG.js"
 fi
