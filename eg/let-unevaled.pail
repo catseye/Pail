@@ -1,0 +1,7 @@
+**[*let [
+     [g moo]
+     **[*let [
+          [consnull *[#g null]]
+          ***consnull
+       ]]
+  ]]

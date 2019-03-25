@@ -1,5 +1,5 @@
 *.hi
 *.o
 *.jsmod
-bin/pail.exe
+bin/*.exe
 demo/pail.js

@@ -1,0 +1,7 @@
+**[*let [
+     [sndg *[**[*uneval snd] **[*uneval g]]]
+     **[*let [
+          [g [x y]]
+          ***sndg
+       ]]
+  ]]
