@@ -1,0 +1,3 @@
+    -> Functionality "Evaluate Pail Expression" is implemented by
+    -> shell command
+    -> "bin/pail %(test-body-file)"
