@@ -15,7 +15,7 @@ found in the `src/Language` subdirectory:
 The literate Haskell was written as if it were Markdown, so you might
 (or might not) have luck looking at it as such in a browsing interface:
 
-*   [src/Language/Pail.lhs.md](src/Language/Pail.lhs.md)
+*   [src/Language/](src/Language/)
 
 Some tests, in [Falderal][] format, which might clarify the intended
 behaviour, can be found in `Pail.md` in the `tests` subdirectory:
