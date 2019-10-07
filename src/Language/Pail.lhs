@@ -1,4 +1,4 @@
-> module Pail where
+> module Language.Pail where
 
 Pail
 ====

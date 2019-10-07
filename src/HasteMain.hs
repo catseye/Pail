@@ -3,7 +3,7 @@ module Main where
 import Haste.DOM (withElems, getValue, setProp)
 import Haste.Events (onEvent, MouseEvent(Click))
 
-import Pail (runPail)
+import Language.Pail (runPail)
 
 
 main = withElems ["prog", "result", "run-button"] driver
