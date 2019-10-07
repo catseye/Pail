@@ -18,9 +18,9 @@ The literate Haskell was written as if it were Markdown, so you might
 *   [src/Language/Pail.lhs.md](src/Language/Pail.lhs.md)
 
 Some tests, in [Falderal][] format, which might clarify the intended
-behaviour, can be found in `Pail.markdown` in the `tests` subdirectory:
+behaviour, can be found in `Pail.md` in the `tests` subdirectory:
 
-*   [tests/Pail.markdown](tests/Pail.markdown)
+*   [tests/Pail.md](tests/Pail.md)
 
 These files are distributed under a 3-clause BSD license.  See the file
 `LICENSE` for the license text.
