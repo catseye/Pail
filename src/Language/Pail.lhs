@@ -82,8 +82,8 @@ that will shed some more light on Rho.
 What follows is `Pail.lhs`, the reference implementation of the Pail
 programming language.
 
-> import Text.ParserCombinators.Parsec
-> import qualified Data.Map as Map
+> import Text.ParserCombinators.Parsec  
+> import qualified Data.Map as Map  
 
 
 Definitions
@@ -120,11 +120,11 @@ that functions cannot strictly speaking be denoted directly, but for
 convenience, functions with known names can be represented by `<foo>`,
 where `foo` is the name of the function.
 
-> instance Show Expr where
->     show (Symbol s) = s
->     show (Pair a b) = "[" ++ (show a) ++ " " ++ (show b) ++ "]"
->     show (Eval x)   = "*" ++ (show x)
->     show (Fn n _)   = "<" ++ n ++ ">"
+> instance Show Expr where  
+>     show (Symbol s) = s  
+>     show (Pair a b) = "[" ++ (show a) ++ " " ++ (show b) ++ "]"  
+>     show (Eval x)   = "*" ++ (show x)  
+>     show (Fn n _)   = "<" ++ n ++ ">"  
 
 > instance Eq Expr where
 
@@ -156,31 +156,31 @@ The overall grammar of the language is:
 A symbol is denoted by a string which may contain only alphanumeric
 characters, hyphens, underscores, and question marks.
 
-> symbol = do
->     c <- letter
->     cs <- many (alphaNum <|> char '-' <|> char '?' <|> char '_')
->     return (Symbol (c:cs))
+> symbol = do  
+>     c <- letter  
+>     cs <- many (alphaNum <|> char '-' <|> char '?' <|> char '_')  
+>     return (Symbol (c:cs))  
 
 A pair of expressions a and b is denoted
 
     [a b]
 
-> pair = do
->     string "["
->     a <- expr
->     b <- expr
->     spaces
->     string "]"
->     return (Pair a b)
+> pair = do  
+>     string "["  
+>     a <- expr  
+>     b <- expr  
+>     spaces  
+>     string "]"  
+>     return (Pair a b)  
 
 An evaluation of an expression a is denoted
 
     *a
 
-> eval = do
->     string "*"
->     a <- expr
->     return (Eval a)
+> eval = do  
+>     string "*"  
+>     a <- expr  
+>     return (Eval a)  
 
 As a bit of syntactic sugar, the denotation
 
@@ -190,20 +190,20 @@ for some expression a is equivalent to the denotation
 
     **[*uneval a]
 
-> uneval = do
->     string "#"
->     a <- expr
->     return (Eval (Eval (Pair (Eval (Symbol "uneval")) a)))
+> uneval = do  
+>     string "#"  
+>     a <- expr  
+>     return (Eval (Eval (Pair (Eval (Symbol "uneval")) a)))  
 
 The top-level parsing function implements the overall grammar given above.
 Note that we need to give the type of this parser here -- otherwise the
 type inferencer freaks out for some reason.
 
-> expr :: Parser Expr
-> expr = do
->     spaces
->     r <- (eval <|> uneval <|> pair <|> symbol)
->     return r
+> expr :: Parser Expr  
+> expr = do  
+>     spaces  
+>     r <- (eval <|> uneval <|> pair <|> symbol)  
+>     return r  
 
 A convenience function for parsing Pail programs.
 
@@ -270,26 +270,26 @@ things will get even worse), we use the terminology that a function
 Applying `fst` (resp. `snd`) to a pair returns the o-reduction of the
 first (resp. second) element of that pair.
 
-> pFst env (Pair a _)                           = oReduce env a
-> pSnd env (Pair _ b)                           = oReduce env b
+> pFst env (Pair a _)                           = oReduce env a  
+> pSnd env (Pair _ b)                           = oReduce env b  
 
 Applying `ifequal` to a pair of pairs proceeds as follows.  The contents
 of the first pair are compared for (deep) equality.  If they are equal,
 the o-reduction of the first element of the second pair is returned; if not,
 the o-reduction of the second element of the second pair is returned.
 
-> pIfEqual env (Pair (Pair a b) (Pair yes no))
->                                   | a == b    = oReduce env yes
->                                   | otherwise = oReduce env no
+> pIfEqual env (Pair (Pair a b) (Pair yes no))  
+>                                   | a == b    = oReduce env yes  
+>                                   | otherwise = oReduce env no  
 
 Applying `typeof` to a value of any kind returns a symbol describing
 the type of that value.  For symbol, `symbol` is returned; for pairs,
 `pair`; for evaluations, `eval`; and for functions, `function`.
 
-> pTypeOf env (Symbol _)                        = Symbol "symbol"
-> pTypeOf env (Pair _ _)                        = Symbol "pair"
-> pTypeOf env (Eval _)                          = Symbol "eval"
-> pTypeOf env (Fn _ _)                          = Symbol "function"
+> pTypeOf env (Symbol _)                        = Symbol "symbol"  
+> pTypeOf env (Pair _ _)                        = Symbol "pair"  
+> pTypeOf env (Eval _)                          = Symbol "eval"  
+> pTypeOf env (Fn _ _)                          = Symbol "function"  
 
 Applying `uneval` to an expression returns the evaluation of that
 expression.  (Note that nothing is reduced in this process.)
@@ -303,27 +303,27 @@ the second element of the binder is o-reduced to obtain a value of any type.
 A new environment is created; it is just like the current evironment except
 with the obtained symbol bound to the obtained value.
 
-> pLet env (Pair (Pair name binding) expr)      =
->     let
->         (Symbol sym) = oReduce env name
->         val          = oReduce env binding
->         env'         = Map.insert sym val env
->     in
->         oReduce env' expr
+> pLet env (Pair (Pair name binding) expr)      =  
+>     let  
+>         (Symbol sym) = oReduce env name  
+>         val          = oReduce env binding  
+>         env'         = Map.insert sym val env  
+>     in  
+>         oReduce env' expr  
 
 And finally, we define the standard environment by associating each of the
 above defined functions with a symbol.
 
-> stdEnv :: Env
-> stdEnv = Map.fromList $ map (\(name, fun) -> (name, (Fn name fun)))
->     [
->       ("fst",        pFst),
->       ("snd",        pSnd),
->       ("if-equal?",  pIfEqual),
->       ("type-of",    pTypeOf),
->       ("uneval",     pUnEval),
->       ("let",        pLet)
->     ]
+> stdEnv :: Env  
+> stdEnv = Map.fromList $ map (\(name, fun) -> (name, (Fn name fun)))  
+>     [  
+>       ("fst",        pFst),  
+>       ("snd",        pSnd),  
+>       ("if-equal?",  pIfEqual),  
+>       ("type-of",    pTypeOf),  
+>       ("uneval",     pUnEval),  
+>       ("let",        pLet)  
+>     ]  
 
 
 Top-Level Driver
@@ -334,10 +334,10 @@ evaluate to a string which contains the parse error message and always
 begins with '%'.  No Pail expression can begin with this character, so
 parse errors can be detected unambiguously.
 
-> runPail line =
->     case (parse expr "" line) of
->         Left err -> "%" ++ (show err)
->         Right x -> show (oReduce stdEnv x)
+> runPail line =  
+>     case (parse expr "" line) of  
+>         Left err -> "%" ++ (show err)  
+>         Right x -> show (oReduce stdEnv x)  
 
 Happy bailing!  
 Chris Pressey  
