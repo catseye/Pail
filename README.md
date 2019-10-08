@@ -8,14 +8,19 @@ This is the reference distribution for Pail.
 
 The Pail programming language is documented in the literate Haskell
 source code of its reference interpreter, `Pail.lhs`, which can be
-found in the `src` subdirectory:
+found in the `src/Language` subdirectory:
 
-*   [src/Pail.lhs](src/Pail.lhs)
+*   [src/Language/Pail.lhs](src/Language/Pail.lhs)
+
+The literate Haskell was written as if it were Markdown, so you might
+(or might not) have luck looking at it as such in a browsing interface:
+
+*   [Language.Pail](src/Language/)
 
 Some tests, in [Falderal][] format, which might clarify the intended
-behaviour, can be found in `Pail.markdown` in the `tests` subdirectory:
+behaviour, can be found in `Pail.md` in the `tests` subdirectory:
 
-*   [tests/Pail.markdown](tests/Pail.markdown)
+*   [tests/Pail.md](tests/Pail.md)
 
 These files are distributed under a 3-clause BSD license.  See the file
 `LICENSE` for the license text.
