@@ -1,6 +1,13 @@
 Pail
 ====
 
+_Try it online_ [@ catseye.tc](https://catseye.tc/installation/Pail)
+| _Wiki entry_ [@ esolangs.org](https://esolangs.org/wiki/Pail)
+| _See also:_ [Pixley](https://github.com/catseye/Pixley)
+∘ [Quylthulg](https://github.com/catseye/Quylthulg)
+
+- - - -
+
 Pail is an esoteric programming language based on pairs; just as Lisp
 stands for *LIS*t *P*rocessing, Pail stands for *PAI*r *L*anguage.
 
