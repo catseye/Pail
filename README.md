@@ -3,8 +3,8 @@ Pail
 
 _Try it online_ [@ catseye.tc](https://catseye.tc/installation/Pail)
 | _Wiki entry_ [@ esolangs.org](https://esolangs.org/wiki/Pail)
-| _See also:_ [Pixley](https://github.com/catseye/Pixley)
-∘ [Quylthulg](https://github.com/catseye/Quylthulg)
+| _See also:_ [Pixley](https://github.com/catseye/Pixley#readme)
+∘ [Quylthulg](https://github.com/catseye/Quylthulg#readme)
 
 - - - -
 
