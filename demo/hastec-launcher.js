@@ -40,7 +40,5 @@ function launch(config) {
   var select = makeSelect(controlPanel, "example program:", examplePrograms, function(option) {
     document.getElementById('prog').value = option.contents;
   });
-  selectOptionByText(select, "apply-fun.pail");
+  selectOptionByText(select, config.initialOption);
 }
-
-launch({ container: document.getElementById('installation') });
